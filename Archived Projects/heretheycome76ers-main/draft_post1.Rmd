@@ -1,0 +1,33 @@
+---
+title: "MVP_Embiid"
+author: "Ben Arancibia"
+date: "2/15/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Welcome to Here They Come 76ers, a weekly newsletter about the NBA and NBA data focusing on the 76ers. You are getting this email because you signed up for my Substack and if you don't remember doing that let me explain what I am trying to do. I love the NBA, my hometown Sixers, and data. I am a data scientist and love messing around with data. Over the course of the Covid19 Pandemic (why is this still going on btw?), I started to play around with NFL data using nflFastR and got really jealous of the community around that data. Whenever I looked for good NBA data explainers and or an easy to find NBA R / Python Community - so that's what I am using this space for. I wanted to create a list / newsletter on all things NBA data focusing on the 76ers. This newsletter will have data analysis using primarily R, but I might dabble in Python. It might include tutorials as I try to figure out the various ways to get data; as well as, what I learn about publicly available NBA data, which might not be documented. Hopefully, it will create something useful for people to use and comment on. 
+
+Before getting into Embiid's MVP Season, I want to do some quick housekeeping.
+
+About this newsletter
+
+Right now this newsletter is free and it's meant for fun. That means you can read it without paying anything. If this newsletter hits some sort of critical mass, I might make part of as part of paid subscription. This potential subscription would be to get access to code used to create graphics / do analysis or some indepth tutorials. We will just have to see how this goes - I am not expecting to make money off this, but it would be great if I could cover the cost of NBA League Pass or a couple coffees when we are allowed back into public.
+
+Embiid the MVP?
+
+Right now according to FanDuel the top three are Lebron James, Joel Embiid, and Nikola Jokic. In reality all three are really close together in terms of their worthiness for the MVP award right now. Embiid is averaging 29.7 points per game, 10.8 rebounds, and 3.1 assists, while LeBron is averaging 25.7 points, 8.2 rebounds, and 7.9 assits, and Jokic is averaging 27.4 points, 11.1 rebounds, and 8.6 assists.
+
+Taking a look at some their advanced stats they are still all really bunched together. 
+
+I think LeBron’s MVP candidacy is based on nostalgia and being the best player in the game, but the MVP is a regular season award. Right now Embiid and Jokic have better numbers and better PER and Win Shares.  
+
+Jokic and Embiid are really close in terms of stats, Jokic’s 8 .6 assists is really impressive. Embiid though is having more impressive defensive season compared to Jokic. Also, when it comes to the MVP their team’s records have to be taken into account and the 76ers are first in the East and the Nuggets are the eighth seed. 
+
+I think Embiid is the MVP, BUT the games played is becoming a real issue. If he continues to miss games then he is going to be out of serious MVP contention. He has already missed 6 games and in a shortened season that will really matter. 
+
+ 
