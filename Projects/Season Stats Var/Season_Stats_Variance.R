@@ -10,9 +10,12 @@ library(ggforce)
 library(ggbrace)
 library(magick)
 library(ggtext)
+library(reactablefmtr)
+library(dataui)
 
 
-# Get Basketball Reference team name info 
+'''
+Get Basketball Reference team name info 
 bref_tms <- dictionary_bref_teams()
 
 bref_tms <- bref_tms %>% 
@@ -26,10 +29,34 @@ bref_tms <- bref_tms %>%
     slugTeamBREF == "NOH" ~ "NOP",
     TRUE ~ slugTeamBREF
   ))
-
-
 df_advanced_stats <- NBAPerGameAdvStatistics(season = 2021)
 df_advanced_stats_36 <- NBAPerGameStatisticsPer36Min(season = 2021)
 
+'''
+
+#NBA Stat R - grab season stats per game to try to show variance
 
 df_2021_gamelogs <- game_logs(seasons = 2021, result_types = "player")
+
+
+selected_logs <- df_2021_gamelogs %>%
+  select(namePlayer, numberGamePlayerSeason, idPlayer,
+         fgm:pctFT, fg2m:fpts)
+
+filter <- selected_logs %>%
+  group_by(namePlayer) %>%
+  summarise(minutes = sum(minutes)) %>%
+  filter(minutes > 1000)
+
+player_logs <- selected_logs %>%
+  filter(namePlayer %in% filter$namePlayer) %>%
+  group_by(namePlayer) %>%
+  summarise(Plus_Minus = list(plusminus))
+
+#not working maybe look at gt?
+reactable(player_logs, 
+          columns = list(
+            namePlayer = colDef(maxWidth = 85),
+            Plus_Minus = colDef(cell = react_sparkline(player_logs)
+            )
+          ))
