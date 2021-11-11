@@ -11,7 +11,7 @@ library(ggbrace)
 library(magick)
 library(ggtext)
 library(reactablefmtr)
-library(dataui)
+
 
 
 '''
@@ -57,6 +57,6 @@ player_logs <- selected_logs %>%
 reactable(player_logs, 
           columns = list(
             namePlayer = colDef(maxWidth = 85),
-            Plus_Minus = colDef(cell = react_sparkline(player_logs)
-            )
+            Plus_Minus = colDef(
+              cell = data_bars(player_logs))
           ))
