@@ -10,7 +10,7 @@ library(ggforce)
 library(ggbrace)
 library(magick)
 library(ggtext)
-library(reactablefmtr)
+library(gt)
 
 
 
@@ -49,14 +49,12 @@ filter <- selected_logs %>%
   filter(minutes > 1000)
 
 player_logs <- selected_logs %>%
-  filter(namePlayer %in% filter$namePlayer) %>%
-  group_by(namePlayer) %>%
-  summarise(Plus_Minus = list(plusminus))
+  filter(namePlayer %in% filter$namePlayer)
 
 #not working maybe look at gt?
-reactable(player_logs, 
-          columns = list(
-            namePlayer = colDef(maxWidth = 85),
-            Plus_Minus = colDef(
-              cell = data_bars(player_logs))
-          ))
+library(gtExtras)
+plus_minus_sparkline <- player_logs %>%
+  dplyr::group_by(namePlayer) %>%
+  dplyr::summarise(plus_minus = list(plusminus), .groups = 'drop') %>%
+  gt() %>%
+  gt_sparkline(plus_minus)
