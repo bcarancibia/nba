@@ -51,6 +51,15 @@ filter <- selected_logs %>%
 player_logs <- selected_logs %>%
   filter(namePlayer %in% filter$namePlayer)
 
+player_logs_separate <- player_logs %>%
+  separate(namePlayer, c("Name", "Surname"))
+
+df_separate <- df %>%
+  separate(name, c("Name", "Surname"))
+
+mvp_stats <- player_logs_separate %>%
+  filter(Surname %in% df_separate$Surname)
+
 #not working maybe look at gt?
 library(gtExtras)
 plus_minus_sparkline <- player_logs %>%
