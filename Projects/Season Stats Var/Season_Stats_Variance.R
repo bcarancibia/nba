@@ -80,3 +80,6 @@ plus_minus_sparkline <- mvp_stats_top10 %>%
     namePlayer = "Player",
     plus_minus = "Plus Minus") %>%
   gt_sparkline(plus_minus)
+
+
+
