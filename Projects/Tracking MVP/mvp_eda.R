@@ -102,6 +102,8 @@ df$award <- factor(df$award, levels = c("MVP", "ROY", "DPOY", "SMOY", "MIP", "CO
 df <- df %>%
   filter(award == "MVP")
 
+df_sorted <- df %>%
+  arrange((americanOdds))
 
 df_2022_gamelogs <- game_logs(seasons = 2022, result_types = "player")
 
@@ -128,9 +130,41 @@ mvp_stats <- player_logs_separate %>%
 
 mvp_stats$namePlayer <- str_c(mvp_stats$Name, ' ', mvp_stats$Surname)
 
-target <- c("Stephen Curry", "Kevin Durant", "Giannis Antetokounmpo",
-            "Luka Doncic", "Joel Embiid", "Nikola Jokic", "Jimmy Butler",
-            "Paul George", "Ja Morant", "Donovan Mitchell")
+# do a join
 
-mvp_stats_top10 <- mvp_stats %>%
-  filter(namePlayer %in% target)
+mvp_stats_odds <- mvp_stats %>%
+  inner_join(df_separate, by = c("Surname" = "Surname"), suffix = c("_stats", "_odds")) %>%
+  arrange(americanOdds)
+
+mvp_stats_odds <- mvp_stats_odds %>%
+  filter(namePlayer != "Seth Curry") %>%
+  filter(namePlayer != "Thanasis Antetokounmpo") %>%
+  filter(namePlayer != "Davion Mitchell") %>%
+  filter(americanOdds < 10000) %>%
+  arrange(americanOdds)
+
+
+#work through a table
+
+
+
+
+library(gtExtras)
+plus_minus_sparkline <- mvp_stats_top10 %>%
+  dplyr::group_by(namePlayer) %>%
+  dplyr::summarise(plus_minus = list(plusminus), .groups = 'drop') %>%
+  gt() %>%
+  cols_label(
+    namePlayer = "Player",
+    plus_minus = "Plus Minus") %>%
+  gt_sparkline(plus_minus)
+
+
+
+
+
+
+
+
+
+
