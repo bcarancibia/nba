@@ -140,26 +140,54 @@ mvp_stats_odds <- mvp_stats_odds %>%
   filter(namePlayer != "Seth Curry") %>%
   filter(namePlayer != "Thanasis Antetokounmpo") %>%
   filter(namePlayer != "Davion Mitchell") %>%
+  filter(namePlayer != "Ed Davis") %>%
+  filter(namePlayer != "Terence Davis") %>%
+  filter(namePlayer != "Thaddeus Young") %>%
+  filter(namePlayer != "Jared Butler") %>%
   filter(americanOdds < 10000) %>%
   arrange(americanOdds)
 
 
+mvp_stats_odds[is.na(mvp_stats_odds)] <- 0
+
+
 #work through a table
 
+# library(gtExtras)
+# plus_minus_sparkline <- mvp_stats_top10 %>%
+#   dplyr::group_by(namePlayer) %>%
+#   dplyr::summarise(plus_minus = list(plusminus), .groups = 'drop') %>%
+#   gt() %>%
+#   cols_label(
+#     namePlayer = "Player",
+#     plus_minus = "Plus Minus") %>%
+#   gt_sparkline(plus_minus)
 
-
-
-library(gtExtras)
-plus_minus_sparkline <- mvp_stats_top10 %>%
-  dplyr::group_by(namePlayer) %>%
-  dplyr::summarise(plus_minus = list(plusminus), .groups = 'drop') %>%
+options(digits=2)
+mvp_stats_odds %>%
+  select(namePlayer, pts, treb, ast, stl, tov, minutes, pctFG, pctFG3, pctFT, pctFG2, americanOdds, plusminus) %>%
+  group_by(namePlayer) %>%
+  summarise(points = mean(pts), rebounds = mean(treb), assists = mean(ast),
+            turnovers = mean(tov), minutes = mean(minutes), pctFG = mean(pctFG),
+            pctFG3 = mean(pctFG3), pctFT = mean(pctFT), pctFG2 = mean(pctFG2),
+            mvpodds = mean(americanOdds), plus_minus_average = mean(plusminus), 
+            plus_minus = list(plusminus), .groups = 'drop') %>%
+  arrange(mvpodds) %>%
   gt() %>%
   cols_label(
-    namePlayer = "Player",
-    plus_minus = "Plus Minus") %>%
+    namePlayer = "Player", 
+    rebounds = "Rebounds",
+    assists = "Assists",
+    turnovers = "Turnovers",
+    minutes = "Minutes",
+    pctFG = "% Field Goals",
+    pctFG3 = "% Threes",
+    pctFT = "% Free Throws",
+    pctFG2 = "% Twos",
+    mvpodds = "MVP Odds",
+    plus_minus_average = "Average Plus Minus",
+    plus_minus = "Plus Minus")%>%
   gt_sparkline(plus_minus)
-
-
 
 
 
