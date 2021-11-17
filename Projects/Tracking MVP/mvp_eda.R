@@ -99,8 +99,7 @@ df <- bind_rows(df_mvp, df_dpoy, df_coy, df_roy, df_mip, df_smoy)
 
 df$award <- as.factor(df$award)
 df$award <- factor(df$award, levels = c("MVP", "ROY", "DPOY", "SMOY", "MIP", "COY"))
-df <- df %>%
-  filter(award == "MVP")
+df <- df_mvp
 
 df_sorted <- df %>%
   arrange((americanOdds))
@@ -153,7 +152,7 @@ mvp_stats_odds[is.na(mvp_stats_odds)] <- 0
 
 #work through a table
 
-# library(gtExtras)
+library(gtExtras)
 # plus_minus_sparkline <- mvp_stats_top10 %>%
 #   dplyr::group_by(namePlayer) %>%
 #   dplyr::summarise(plus_minus = list(plusminus), .groups = 'drop') %>%
