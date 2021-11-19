@@ -175,6 +175,7 @@ mvp_stats_odds %>%
   gt() %>%
   cols_label(
     namePlayer = "Player", 
+    points = "Points",
     rebounds = "Rebounds",
     assists = "Assists",
     turnovers = "Turnovers",
@@ -186,7 +187,18 @@ mvp_stats_odds %>%
     mvpodds = "MVP Odds",
     plus_minus_average = "Average Plus Minus",
     plus_minus = "Plus Minus")%>%
-  gt_sparkline(plus_minus)
+  gt_sparkline(plus_minus) %>%
+  tab_options(
+    heading.title.font.size = 18,
+    heading.subtitle.font.size = 10,
+    heading.title.font.weight = 'bold',
+    column_labels.font.size = 11,
+    column_labels.font.weight = 'bold',
+    table.font.size = 11,
+    table.font.names = "Microsoft Sans Serif", 
+    source_notes.font.size = 7,
+    data_row.padding = px(.5)
+  )
 
 
 
