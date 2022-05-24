@@ -39,7 +39,7 @@ p_df <- df %>%
 
 #started plotting add theme and make it density
 ggplot(p_df, aes(elp)) + 
-  geom_bar()
+  geom_histogram(binwidth = 1)
 
 
 
